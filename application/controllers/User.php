@@ -102,7 +102,7 @@ class User extends \MY_Controller {
         $result = $this->db->select('s.title,s.id,s.add_time,si.name')
             ->from('questions AS s' )
             ->join('category AS si', 's.category_id = si.id', 'left' )
-            ->limit(20, $start)
+            ->limit(7, $start)
             ->get()->result_array();
 
 
@@ -124,7 +124,7 @@ class User extends \MY_Controller {
 
 
     //分页函数
-    protected function page_config($url,$count,$limit=20){
+    protected function page_config($url,$count,$limit=7){
         $config['base_url'] = $url;
         $config['total_rows'] = $count;
         $config['per_page'] = $limit;
