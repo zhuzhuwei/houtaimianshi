@@ -18,11 +18,11 @@
                     <div class="layui-card">
                         <div class="layui-card-header">添加问题</div>
                         <div class="layui-card-body" style="padding: 15px;">
-                            <form class="layui-form" action="/user/question_save" lay-filter="component-form-group" method="post">
+                            <form class="layui-form" action="/user/question_save?id=<?php if($question) echo $question['id'] ?>" lay-filter="component-form-group" method="post">
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">标题</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                                        <input type="text" value="<?php if($question){ echo $question['title'];}?>" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
                                     </div>
                                 </div>
 
@@ -33,7 +33,7 @@
                                         <select name="category_id" lay-filter="aihao">
                                             <?php foreach ($list as $key=>$value) { ?>
                                             <option value=""></option>
-                                            <option value="<?php echo $value['id'];?>"><?php echo $value['name'];?></option>
+                                            <option <?php if($question) if($value['id'] ==$question['category_id']) {echo 'selected';};?> value="<?php echo $value['id'];?>"><?php echo $value['name'];?></option>
                                             <?php }?>
                                         </select>
                                     </div>
@@ -44,9 +44,9 @@
                                     <div class="layui-input-block">
                                         <select name="level" lay-filter="aihao">
 
-                                            <option value="1">容易</option>
-                                            <option value="2">中等</option>
-                                            <option value="3">困难</option>
+                                            <option <?php if($question) if(1 ==$question['level']) {echo 'selected';};?> value="1">容易</option>
+                                            <option <?php if($question) if(2 ==$question['level']) {echo 'selected';};?> value="2">中等</option>
+                                            <option <?php  if($question) if(3 ==$question['level']) {echo 'selected';};?> value="3">困难</option>
 
                                         </select>
                                     </div>
@@ -55,7 +55,7 @@
                                 <div class="layui-form-item layui-form-text">
                                     <label class="layui-form-label">答案</label>
                                     <div class="layui-input-block">
-                                        <textarea name="body" placeholder="请输入内容" class="layui-textarea"></textarea>
+                                        <textarea name="body" placeholder="请输入内容" class="layui-textarea"><?php if($question) echo $question['body'];?></textarea>
                                     </div>
                                 </div>
 

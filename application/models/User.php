@@ -50,5 +50,9 @@ class User extends \MY_Model
         return $this->db->select('*')->from('category')->get()->result_array();
     }
 
+    public function get_by_id_question($id){
+        return $this->db->select('*')->from('questions')->where(array('id' => $id))->get()->row_array();
+    }
+
 
 }

@@ -49,6 +49,13 @@ class User extends \MY_Controller {
 
 
     public function add_question(){
+
+        $data['question'] = array();
+        if(isset($_GET['id'])){
+            $question_info = $this->muser->get_by_id_question($_GET['id']);
+            $data['question'] = $question_info;
+        }
+
         $category = $this->muser->get_all_category();
         $data['list'] = $category;
         $this->load->view('user/question',$data);
@@ -56,9 +63,21 @@ class User extends \MY_Controller {
 
     public function question_save(){
 
-        $_POST['add_time'] = time();
+
         $_POST['update_time'] = time();
 
+        if($_GET['id']){
+            $this->db->where(array('id'=>$_GET['id']));
+            $result =$this->db->update('questions', $_POST);
+
+            if($result){
+                redirect('/user/get_question_list');
+            }else{
+                echo "添加失败";
+            }
+
+        }
+        $_POST['add_time'] = time();
         $inset = $this->db->insert('questions', $_POST);
 
 

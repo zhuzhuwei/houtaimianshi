@@ -34,10 +34,10 @@
     <?php foreach ($list as $key=>$value) {?>
     <tr>
         <td><?php echo $value['id'];?></td>
-        <td><?php echo $value['title'];?></td>
+        <td><?php echo ''.$value['title'].'';?></td>
         <td><?php echo $value['name'];?></td>
         <td><?php echo date('Y-m-d',$value['add_time']);?></td>
-        <td>编辑</td>
+        <td><a href="/user/add_question?id=<?php echo $value['id'];?>">编辑</a></td>
     </tr>
     <?php }?>
     </tbody>
